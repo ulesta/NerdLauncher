@@ -9,8 +9,8 @@ public class NerdLauncherActivity extends SingleFragmentActivity {
 
 	@Override
 	protected Fragment createFragment() {
-		// TODO Auto-generated method stub
-		return null;
+		Fragment fragment = new NerdLauncherFragment();
+		return fragment;
 	}
 
 }
