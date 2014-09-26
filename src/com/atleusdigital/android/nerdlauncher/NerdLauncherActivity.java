@@ -8,8 +8,13 @@ import android.view.Menu;
 public class NerdLauncherActivity extends SingleFragmentActivity {
 
 	@Override
-	protected Fragment createFragment() {
-		Fragment fragment = new NerdLauncherFragment();
+	protected Fragment createFragment(int num) {
+		Fragment fragment = null;
+		if (num == 1) {
+			fragment = new NerdLauncherFragment();
+		} else {
+			fragment = new NerdLauncherActivityFragment();
+		}
 		return fragment;
 	}
 

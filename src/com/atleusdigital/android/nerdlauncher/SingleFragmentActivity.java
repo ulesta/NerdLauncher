@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentActivity;
 
 public abstract class SingleFragmentActivity extends FragmentActivity {
 	
-	protected abstract Fragment createFragment();
+	protected abstract Fragment createFragment(int num);
 	
 	// now subclasses can choose to override this to return a diff layout
 	protected int getLayoutResId() {
@@ -20,14 +20,25 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(getLayoutResId());
 		FragmentManager fm = getSupportFragmentManager();
-		Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
+		Fragment fragment = fm.findFragmentById(R.id.fragmentContainer1);
 		
 		if ( fragment == null ) {
-			fragment = createFragment();
+			fragment = createFragment(1);
 			/* for fragments to get arguments, fragments must be 
 				created before adding to fragmentmanager */
 			fm.beginTransaction()
-				.add(R.id.fragmentContainer, fragment)
+				.add(R.id.fragmentContainer1, fragment)
+				.commit();
+		} 
+		
+		fragment = fm.findFragmentById(R.id.fragmentContainer2);
+		
+		if ( fragment == null ) {
+			fragment = createFragment(2);
+			/* for fragments to get arguments, fragments must be 
+				created before adding to fragmentmanager */
+			fm.beginTransaction()
+				.add(R.id.fragmentContainer2, fragment)
 				.commit();
 		} 
 	}
