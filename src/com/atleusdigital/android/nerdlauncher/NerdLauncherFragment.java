@@ -13,7 +13,9 @@ import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -47,16 +49,24 @@ public class NerdLauncherFragment extends ListFragment {
 		});
 		
 		ArrayAdapter<ResolveInfo> adapter = new ArrayAdapter<ResolveInfo>(getActivity(), 
-				android.R.layout.simple_list_item_1, 
+				0, 
 				activities) {
+			@Override
 			public View getView(int pos, View convertView, ViewGroup parent) {
-				View v = super.getView(pos, convertView, parent);
-				// Documentation says that simple_list_item_1 is a TextView
-				// so cast it so that you can set its text value
-				TextView tv = (TextView)v;
+				// check if view is non-existent
+				// we do this because ArrayAdapter takes in a TextView, but we don't have one to supply
+				if (convertView == null) {
+					convertView = getActivity().getLayoutInflater()
+							.inflate(R.layout.view_list_item, null);
+				}
+
+				
+				ImageView imageView = (ImageView)convertView.findViewById(R.id.label_icon);
+				TextView textView = (TextView)convertView.findViewById(R.id.label_text);
 				ResolveInfo ri = getItem(pos);
-				tv.setText(ri.loadLabel(pm));
-				return tv;
+				textView.setText(ri.loadLabel(pm));
+				imageView.setImageDrawable(ri.loadIcon(pm));
+				return convertView;
 			}
 		};
 		
@@ -76,7 +86,5 @@ public class NerdLauncherFragment extends ListFragment {
 		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(i);
 	}
-	
-	
 	
 }

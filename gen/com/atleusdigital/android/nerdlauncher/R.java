@@ -24,12 +24,15 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080001;
+        public static final int action_settings=0x7f080003;
         public static final int fragmentContainer=0x7f080000;
+        public static final int label_icon=0x7f080001;
+        public static final int label_text=0x7f080002;
     }
     public static final class layout {
         public static final int activity_fragment=0x7f030000;
         public static final int activity_nerd_launcher=0x7f030001;
+        public static final int view_list_item=0x7f030002;
     }
     public static final class menu {
         public static final int nerd_launcher=0x7f070000;
