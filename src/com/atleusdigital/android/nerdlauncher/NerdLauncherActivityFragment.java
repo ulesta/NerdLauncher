@@ -90,18 +90,13 @@ public class NerdLauncherActivityFragment extends ListFragment {
 
 	@Override
 	public void onPause() {
-		Log.i(TAG, "onPause!");
-		activities = am.getRunningTasks(MAX_TASKS);
 		super.onPause();
-	}
-	
-	public void onResume() {
-		super.onResume();
-		Log.i(TAG, "onResume!");
-		activities = am.getRunningTasks(MAX_TASKS);
+		Log.i(TAG, "onPause!");
+		activities.removeAll(activities);
+		List<RunningTaskInfo> temp = am.getRunningTasks(MAX_TASKS);
+		activities.addAll(temp);
 		adapter.notifyDataSetChanged();
 	}
-	
 	
 	
 }
